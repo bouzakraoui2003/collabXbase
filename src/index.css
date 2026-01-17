@@ -1,0 +1,485 @@
+@import "tailwindcss";
+
+/* Exact styles copy-pasted from original index.html to ensure 1:1 fidelity */
+:root {
+    --primary: #7c3aed;
+    /* Violet */
+    --secondary: #2563eb;
+    /* Blue */
+    --dark: #0f172a;
+
+    /* Light Mode Variables */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #64748b;
+    --border-color: rgba(255, 255, 255, 0.5);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --card-bg: #ffffff;
+    --nav-bg: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] {
+    /* Dark Mode Variables */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --card-bg: #1e293b;
+    --nav-bg: rgba(30, 41, 59, 0.7);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-tertiary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+/* 3D & Animations */
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.6;
+    /* Default for light mode */
+    pointer-events: none;
+}
+
+/* Make canvas fully visible in dark mode - CRITICAL for particle visibility */
+[data-theme="dark"] #canvas-container {
+    opacity: 1.0 !important;
+    z-index: 0 !important;
+}
+
+/* Ensure canvas element itself is fully visible in dark mode */
+[data-theme="dark"] #canvas-container canvas {
+    opacity: 1.0 !important;
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: none;
+}
+
+/* Light mode canvas opacity */
+[data-theme="light"] #canvas-container {
+    opacity: 0.6;
+}
+
+/* Additional class-based override for dark mode */
+#canvas-container.dark-mode-canvas {
+    opacity: 1.0 !important;
+    z-index: 0 !important;
+}
+
+#canvas-container.dark-mode-canvas canvas {
+    opacity: 1.0 !important;
+}
+
+/* Ensure home-view content is above canvas */
+#home-view>*:not(#canvas-container) {
+    position: relative;
+    z-index: 1;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+}
+
+.card-3d {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.floating-anim {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Brand Marquee Animation */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee-content {
+    display: inline-flex;
+    animation: marquee 40s linear infinite;
+}
+
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Theme-aware transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark mode specific styles */
+[data-theme="dark"] .glass-panel {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .card-3d {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+/* Dark mode utility classes */
+[data-theme="dark"] .dark-mode-text {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .dark-mode-bg {
+    background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .dark-mode-hover:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .dark-mode-dropdown {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dark-mode-mobile-menu {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .theme-toggle-btn {
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover {
+    background-color: var(--bg-tertiary);
+    opacity: 0.8;
+}
+
+[data-theme="light"] .theme-toggle-btn {
+    color: var(--text-secondary);
+    background-color: var(--bg-tertiary);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+    background-color: var(--bg-tertiary);
+    opacity: 0.8;
+}
+
+/* Update text colors for dark mode */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: var(--text-primary);
+}
+
+/* Update section backgrounds */
+[data-theme="dark"] section {
+    background-color: var(--bg-primary);
+}
+
+/* Update input and form elements */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Update cards and panels */
+[data-theme="dark"] .glass-panel,
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .dark-mode-card {
+    background-color: var(--card-bg);
+}
+
+/* Brand marquee dark mode */
+[data-theme="dark"] .marquee-container span {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .marquee-container span:hover {
+    color: var(--text-primary);
+}
+
+/* Comprehensive color updates for dark mode */
+
+/* Navbar */
+[data-theme="dark"] nav {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .nav-link {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .nav-link:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+}
+
+/* Text colors */
+[data-theme="dark"] .text-slate-600,
+[data-theme="dark"] .text-slate-700,
+[data-theme="dark"] .text-slate-800,
+[data-theme="dark"] .text-slate-900 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .text-slate-400,
+[data-theme="dark"] .text-slate-500 {
+    color: var(--text-secondary);
+}
+
+/* Background colors */
+[data-theme="dark"] .bg-slate-50,
+[data-theme="dark"] .bg-slate-100 {
+    background-color: var(--bg-tertiary);
+}
+
+/* Border colors */
+[data-theme="dark"] .border-slate-100,
+[data-theme="dark"] .border-slate-200 {
+    border-color: var(--border-color);
+}
+
+/* Hero section */
+[data-theme="dark"] .hero-badge {
+    background-color: var(--glass-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .hero-text {
+    color: var(--text-secondary);
+}
+
+/* Stats cards */
+[data-theme="dark"] .stats-card-number {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .stats-card-label {
+    color: var(--text-secondary);
+}
+
+/* Buttons */
+[data-theme="dark"] .btn-secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background-color: var(--bg-tertiary);
+}
+
+/* Catalog section */
+[data-theme="dark"] .search-input {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .filter-btn {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .filter-btn:hover:not(.active) {
+    background-color: var(--bg-tertiary);
+}
+
+/* Links and hover states */
+[data-theme="dark"] a:hover {
+    color: var(--text-primary);
+}
+
+/* Section headings */
+[data-theme="dark"] .section-heading {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .section-subheading {
+    color: var(--text-secondary);
+}
+
+/* Form labels */
+[data-theme="dark"] label {
+    color: var(--text-secondary);
+}
+
+/* Mobile menu button */
+[data-theme="dark"] .mobile-menu-btn {
+    color: var(--text-secondary);
+}
+
+/* Footer - keep dark in dark mode */
+[data-theme="dark"] footer {
+    background-color: #000000;
+}
+
+/* View all link */
+[data-theme="dark"] .view-all-link {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+[data-theme="dark"] .view-all-link:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Filter button active states */
+[data-theme="dark"] .filter-btn.active,
+[data-theme="light"] .filter-btn.active {
+    background-color: var(--text-primary) !important;
+    color: var(--bg-primary) !important;
+}
+
+/* Selection */
+::selection {
+    background-color: #e9d5ff;
+    /* purple-200 */
+    color: #581c87;
+    /* purple-900 */
+}
+
+/* Search icon color */
+[data-theme="dark"] #searchInput::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Form card styling */
+[data-theme="dark"] .form-card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+/* Brand marquee container dark mode */
+[data-theme="dark"] .marquee-container .bg-slate-100,
+[data-theme="dark"] .marquee-container .border-slate-200 {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+/* Primary button text color */
+[data-theme="dark"] .btn-primary {
+    color: var(--bg-primary) !important;
+}
+
+[data-theme="light"] .btn-primary {
+    color: #ffffff !important;
+}
+
+/* Ensure button text is visible */
+.btn-primary {
+    color: var(--bg-primary);
+}
+
+/* Additional Utilities */
+.text-gradient {
+    background: linear-gradient(to right, #9333ea, #ec4899, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Custom Hover Scale Utility (Fix for missing zoom) */
+.hover-scale {
+    transition: transform 700ms;
+}
+
+.group:hover .hover-scale {
+    transform: scale(1.1);
+}

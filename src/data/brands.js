@@ -1,0 +1,20 @@
+export const brands = [
+    { name: "Valary Skin", handle: "valaryskin.ma", image: "influncers images/valary.jpg" },
+    { name: "LC Waikiki", handle: "lcwaikiki.morocco", image: "influncers images/lc_waikiki.png" },
+    { name: "King Tacos", handle: "kingtacos_maarif", image: "influncers images/king tacos.jpg" },
+    { name: "Bo Sushi", handle: "bosushi_casablanca", image: "influncers images/bo sushi.jpg" },
+    { name: "Huawei", handle: "huaweimobilemaroc", image: "influncers images/huawei.png" },
+    { name: "Mira Clinic", handle: "miraclinic.tr", image: "influncers images/mira clenic.jpg" },
+    { name: "Health Power", handle: "healthpower_officiel", image: "influncers images/health power.jpg" },
+    { name: "Muzz", handle: "muzz_maghreb", image: "influncers images/muzz.jpg" },
+    { name: "Xiaomi", handle: "xiaomi.morocco", image: "influncers images/redmi.jpg" },
+    { name: "Honor", handle: "honormorocco", image: "influncers images/honor.jpg" },
+    { name: "Franui", handle: "franui.ma", image: "influncers images/franui.png" },
+    { name: "Derma Doc", handle: "dermadocmaroc", image: "influncers images/derma doc.png" },
+    { name: "Hadri Parfums", handle: "hadriparfums", image: "influncers images/hadri.jpg" },
+    { name: "Maroc Skydive", handle: "maroc.skydive", image: "influncers images/maroc skydive.png" },
+    { name: "Numero Arabia", handle: "numeroarabia", image: "influncers images/numero arabia.jpg" },
+    { name: "Clay Oven", handle: "clay.oven", image: "influncers images/clay oven.jpg" },
+    { name: "Palméa", handle: "palmeastore1", image: "https://image2url.com/r2/default/images/1767447023846-c06b3212-8500-4ddc-9db8-21be5fa99638.jpg" },
+    { name: "Intoura", handle: "intoura.ma", image: "https://image2url.com/r2/default/images/1767447311590-62ec67d6-93db-4339-b600-141a4a2940ca.jpg" }
+];
